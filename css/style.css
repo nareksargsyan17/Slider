@@ -1,0 +1,203 @@
+*{
+    font-family: arial;
+}
+#all{
+    max-width: 1250px;
+    height: 650px;
+    margin: 0 auto;
+    text-align: center;
+}
+#forSlide{
+    height: 600px;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
+    overflow: hidden;
+}
+img{
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    background-color:white;
+    border-radius: 50%;
+    margin: 10px;
+}
+#photo{
+    border-radius:0%;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+#buttons{
+    z-index: 2;
+    display: none;
+    position:absolute;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    margin-top: 280px;
+}
+#buttons > button{
+    cursor: pointer;
+    padding: 4px 1px;
+    background-color:transparent;
+    border:none;
+}
+#buttons > button > img{
+    width: 50px;
+    height: 50px;
+    border-radius:0;
+    background-color: transparent;
+}
+#buttons > button:hover{
+    background-color:rgba(20, 20, 20, 0.597)
+}
+.edit:hover{
+    background-color: rgb(223, 216, 13);
+}
+#forInp{
+    z-index: 2;
+    display: none;
+    width: 300px;
+    height: 250px;
+    margin: 100px auto;
+    background-color: rgba(255, 255, 255, 0.805);
+    border-radius:10px;
+    padding: 15px;
+    color:rgb(74, 74, 74);
+}
+#forInp > h2{
+    text-align: center;
+}
+#forInp > form{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+#forInp > form > input{
+    margin-bottom: 20px;
+    padding: 8px 10px;
+    border:none;
+    color:rgb(46, 46, 46);
+    background-color:rgba(187, 187, 187, 0.577);
+    border-radius:10px
+}
+#forInp > form > button{
+    padding: 10px;
+    background-color:rgba(157, 154, 154, 0.352);
+    border:none;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius:10px
+}
+#forInp > form > button:hover{
+    background-color:rgba(128, 128, 128, 0.352)
+}
+.autoplay{
+    margin: 15px;
+    display: flex;
+    align-items:center;
+}    
+.two, .one{
+    z-index: 3;
+    width: 50%;
+}
+.two img{
+    width: 30px;
+    height: 30px;
+}
+#on:hover{
+    background-color: greenyellow
+}
+#off:hover{
+    background-color: rgb(193, 33, 33)
+}
+.two{
+    display: flex;
+    justify-content: end;
+}
+.two>img{
+    padding: 5px;
+    border: 0.5px solid #5d5d5d;
+}
+.one{
+    display: flex;
+    justify-content: start;
+}
+.two>img:hover{
+    background-color:rgb(0, 179, 255);
+}
+#info{
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+}
+#info >div{
+    width: auto;
+    height: auto;
+    background-color:#9898982f;
+    margin: 0px 50px;
+    border-radius: 5%;
+}
+#info > div> *{
+    margin: 20px;
+    color: rgb(34, 34, 34);
+    font-family: arial;
+    font-weight: bold;
+}
+#info > div > h1{
+    margin-bottom: 40px;
+}
+.forEdit{
+    background-color: rgb(223, 216, 13);
+}
+.select{
+    background-color:rgb(0, 179, 255);
+}
+.onclass{
+    z-index: 3;
+    background-color: greenyellow;
+}
+.offclass{
+    background-color:rgb(193, 33, 33)
+}
+.forInpParent{
+    background-color:rgba(240, 255, 255, 0.098);
+    z-index: -1;
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.gallery {
+    display: none;
+    align-items:center;
+    margin: 80px auto;
+    /* transition: 2s; */
+  }
+.gallery-cell {
+    width: 250px;
+    height: 200px;
+    margin: 0;
+    margin-right: 5px;
+    border-radius:0%;
+  }
+  .scale{
+    width: 500px;
+    height: 400px;
+  }
+  @media screen and (max-width : 775px) {
+    #all{
+        width: 755px;
+    }
+  }
+  @media screen and (max-width : 525px) {
+    #all{
+        width: 510px;
+    }
+  }
