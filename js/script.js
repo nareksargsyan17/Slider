@@ -15,19 +15,19 @@ forFade();
 function forFade() {
     if (photo.style.display != "none") {
         fetch("http://localhost:7777/slides/")
-        .then(data => data.json())
-        .then(data => {
-            data.forEach((elem) => {
-                gallery.innerHTML += `<img class="gallery-cell" src=img/${elem.src}>`
+            .then(data => data.json())
+            .then(data => {
+                data.forEach((elem) => {
+                    gallery.innerHTML += `<img class="gallery-cell" src=img/${elem.src}>`
+                })
+                gallery.innerHTML += `<img class="gallery-cell" src=img/${data[0].src}>`
+                gallery.innerHTML += `<img class="gallery-cell" src=img/${data[1].src}>`
+                gallery.innerHTML += `<img class="gallery-cell" src=img/${data[2].src}>`
+                gallery.innerHTML += `<img class="gallery-cell" src=img/${data[3].src}>`
+                gallery.firstElementChild.classList.add("scale");
+                return data;
             })
-            gallery.innerHTML += `<img class="gallery-cell" src=img/${data[0].src}>`
-            gallery.innerHTML += `<img class="gallery-cell" src=img/${data[1].src}>`
-            gallery.innerHTML += `<img class="gallery-cell" src=img/${data[2].src}>`
-            gallery.innerHTML += `<img class="gallery-cell" src=img/${data[3].src}>`
-            gallery.firstElementChild.classList.add("scale");
-            return data;
-        })
-        .then(data => slider(data))
+            .then(data => slider(data))
         function slider(data) {
             const galleryArr = document.querySelectorAll('.gallery-cell');
             let i = -1;
@@ -35,24 +35,23 @@ function forFade() {
             let memoryIndex;
             let slide = setInterval(forInterval, 3000);
             function forInterval() {
-                if(photo.style.display != "none"){
-                if (i === data.length - 1) {
-                    i = 0;
+                if (photo.style.display != "none") {
+                    if (i === data.length - 1) {
+                        i = 0;
+                    } else {
+                        i++;
+                    }
+                    photo.src = `img/${data[i].src}`;
+                    info.firstElementChild.firstElementChild.textContent = data[i].title;
+                    info.firstElementChild.lastElementChild.textContent = data[i].text;
                 } else {
-                    i++;
-                }
-                photo.src = `img/${data[i].src}`;
-                info.firstElementChild.firstElementChild.textContent = data[i].title;
-                info.firstElementChild.lastElementChild.textContent = data[i].text;
-            }else{
-                if (count >= -gallery.parentElement.scrollWidth) {
-                    count -= 255;
-                }else{
-                    count = 0;
-                }
+                    if (count >= -gallery.parentElement.scrollWidth) {
+                        count -= 255;
+                    } else {
+                        count = 0;
+                    }
                     gallery.style.transform = `translateX(${count}px)`;
-                    galleryArr.forEach((elem,index) => {
-                        console.log(elem.offsetLeft,-1 * count);
+                    galleryArr.forEach((elem, index) => {
                         if (elem.offsetLeft == -1 * count) {
                             elem.classList.add("scale");
                             elem.style.opacity = "100%";
@@ -64,7 +63,7 @@ function forFade() {
                             elem.style.opacity = "50%";
                         }
                     })
-            }
+                }
             }
             edit.addEventListener("click", () => {
                 clearInterval(slide);
@@ -87,53 +86,52 @@ function forFade() {
                 on.classList.remove("onclass")
             })
             buttons.lastElementChild.addEventListener("click", () => {
-                if(photo.style.display != "none"){
-                if (i >= data.length - 1) {
-                    i = 0;
+                if (photo.style.display != "none") {
+                    if (i >= data.length - 1) {
+                        i = 0;
+                    } else {
+                        i++;
+                    }
+                    photo.src = `img/${data[i].src}`;
+                    info.firstElementChild.firstElementChild.textContent = data[i].title;
+                    info.firstElementChild.lastElementChild.textContent = data[i].text;
                 } else {
-                    i++;
+                    if (count < 0) {
+                        count += 255;
+                        gallery.style.transform = `translateX(${count}px)`;
+                        galleryArr.forEach((elem, index) => {
+                            if (elem.offsetLeft == -1 * count) {
+                                elem.classList.add("scale");
+                                elem.style.opacity = "100%";
+                                info.firstElementChild.firstElementChild.textContent = data[index].title;
+                                info.firstElementChild.lastElementChild.textContent = data[index].text;
+                                memoryIndex = index;
+                            } else {
+                                elem.classList.remove("scale");
+                                elem.style.opacity = "50%";
+                            }
+                        })
+                    }
                 }
-                photo.src = `img/${data[i].src}`;
-                info.firstElementChild.firstElementChild.textContent = data[i].title;
-                info.firstElementChild.lastElementChild.textContent = data[i].text;
-            }else{
-                if (count < 0) {
-                    count += 255;
-                    gallery.style.transform = `translateX(${count}px)`;
-                    galleryArr.forEach((elem, index) => {
-                        if (elem.offsetLeft == -1 * count) {
-                            elem.classList.add("scale");
-                            elem.style.opacity = "100%";
-                            info.firstElementChild.firstElementChild.textContent = data[index].title;
-                            info.firstElementChild.lastElementChild.textContent = data[index].text;
-                            memoryIndex = index;
-                        } else {
-                            elem.classList.remove("scale");
-                            elem.style.opacity = "50%";
-                        }
-                    })
-                }
-            }
             })
             buttons.firstElementChild.addEventListener("click", () => {
-                if(photo.style.display != "none"){
-                if (i <= 0) {
-                    i = data.length - 1;
+                if (photo.style.display != "none") {
+                    if (i <= 0) {
+                        i = data.length - 1;
+                    } else {
+                        i--;
+                    }
+                    photo.src = `img/${data[i].src}`;
+                    info.firstElementChild.firstElementChild.textContent = data[i].title;
+                    info.firstElementChild.lastElementChild.textContent = data[i].text;
                 } else {
-                    i--;
-                }
-                photo.src = `img/${data[i].src}`;
-                info.firstElementChild.firstElementChild.textContent = data[i].title;
-                info.firstElementChild.lastElementChild.textContent = data[i].text;
-            }else{
-                if (count >= -gallery.parentElement.scrollWidth) {
-                    count -= 255;
-                }else{
-                    count = 0;
-                }
+                    if (count >= -gallery.parentElement.scrollWidth) {
+                        count -= 255;
+                    } else {
+                        count = 0;
+                    }
                     gallery.style.transform = `translateX(${count}px)`;
-                    galleryArr.forEach((elem,index) => {
-                        console.log(elem.offsetLeft, -1 * count);
+                    galleryArr.forEach((elem, index) => {
                         if (elem.offsetLeft == -1 * count) {
                             console.log(elem);
                             elem.classList.add("scale");
@@ -146,7 +144,7 @@ function forFade() {
                             elem.style.opacity = "50%";
                         }
                     })
-            }
+                }
             })
             on.addEventListener("click", () => {
                 buttons.style.display = "none";
@@ -157,7 +155,7 @@ function forFade() {
             forInp.lastElementChild.addEventListener("submit", async (e) => {
                 e.preventDefault();
                 slide = setInterval(forInterval, 3000);
-                await fetch(`http://localhost:7777/slides/${photo.style.display != "none"? i+1 : memoryIndex+1}`, {
+                await fetch(`http://localhost:7777/slides/${photo.style.display != "none" ? i + 1 : memoryIndex + 1}`, {
                     method: "PATCH",
                     headers: {
                         "content-type": "application/json"
@@ -178,10 +176,9 @@ function forFade() {
                 fade.classList.add("select");
                 carousel.classList.remove("select");
                 clearInterval(slide)
-                if(buttons.style.display != "flex"){
+                if (buttons.style.display != "flex") {
                     slide = setInterval(forInterval, 3000)
                 }
-                
             })
             carousel.addEventListener("click", () => {
                 fade.classList.remove("select");
@@ -190,15 +187,10 @@ function forFade() {
                 photo.style.display = "none";
                 info.style.alignItems = "flex-start";
                 clearInterval(slide)
-                if(buttons.style.display != "flex"){
+                if (buttons.style.display != "flex") {
                     slide = setInterval(forInterval, 3000)
                 }
-
             })
         }
     }
-    }
-
-
-
-
+}
